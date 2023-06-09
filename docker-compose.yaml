@@ -1,0 +1,19 @@
+version: '3'
+services:
+  spark-master:
+    image: apache/spark
+    command: /opt/spark/sbin/start-master.sh
+    environment:
+      SPARK_NO_DAEMONIZE: true
+    ports:
+      - 8080:8080
+  spark-worker-1:
+    image: apache/spark
+    command: /opt/spark/sbin/start-worker.sh -c 2 spark://spark-master:7077
+    environment:
+      SPARK_NO_DAEMONIZE: true
+  spark-worker-2:
+    image: apache/spark
+    command: /opt/spark/sbin/start-worker.sh -c 2 spark://spark-master:7077
+    environment:
+      SPARK_NO_DAEMONIZE: true
